@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from gilded_rose import Item, GildedRose
+from gilded_rose import GildedRose
 from itertools import zip_longest
 from typing import List
+from item import Item
 
-STANDARD_ITEM = "standard item"
-AGED_BRIE = "Aged Brie"
-SULFURAS = "Sulfuras, Hand of Ragnaros"
-BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert"
+from item_names import AGED_BRIE, BACKSTAGE_PASSES, STANDARD_ITEM, SULFURAS
 
 class GildedRoseTest(unittest.TestCase):
 
