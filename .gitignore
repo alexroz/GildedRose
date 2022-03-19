@@ -3,4 +3,5 @@
 .coverage
 .idea/
 .vscode/
+__pychase__/
 *.iml

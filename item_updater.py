@@ -24,4 +24,4 @@ def update_item(item: Item) -> None:
             handler.update_quality(item)
             return
 
-    raise NotImplemented(f"No handler for item {item.name}")
+    raise NotImplementedError(f"No handler for item: {item.name}")

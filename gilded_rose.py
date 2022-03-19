@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from item_calc import update_item
+from item_updater import update_item
 
 
 class GildedRose(object):
