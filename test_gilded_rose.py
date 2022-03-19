@@ -75,7 +75,12 @@ class GildedRoseTest(unittest.TestCase):
     def test_update_aged_brie_increases_in_quality(self):
         item = Item(name=AGED_BRIE, sell_in=10, quality=20)
         result = self._act(item)
-        self._validate(result, Item(name=AGED_BRIE, sell_in=9, quality=21))        
+        self._validate(result, Item(name=AGED_BRIE, sell_in=9, quality=21))
+
+    def test_update_aged_brie_quality_increases_by_two_quality_after_sell_by(self):
+        item = Item(name=AGED_BRIE, sell_in=0, quality=20)
+        result = self._act(item)
+        self._validate(result, Item(name=AGED_BRIE, sell_in=-1, quality=22))
 
     def test_update_aged_brie_does_not_increase_above_fifty(self):
         item = Item(name=AGED_BRIE, sell_in=10, quality=50)
