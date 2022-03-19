@@ -1,6 +1,7 @@
 from typing import List
 from aged_brie_handler import AgedBrieHandler
 from backstage_passes_handler import BackstagePassesHandler
+from conjured_item_handler import ConjuredItemHandler
 from item import Item
 from item_handler import ItemHandler
 from standard_item_handler import StandardItemHandler
@@ -13,6 +14,7 @@ ORDERED_HANDLERS: List[ItemHandler] = [
     SulfurasHandler(),
     BackstagePassesHandler(),
     AgedBrieHandler(),
+    ConjuredItemHandler(),
     # default, could also be the hardcoded fallback in update_item
     StandardItemHandler(),
 ]

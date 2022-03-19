@@ -6,7 +6,7 @@ from itertools import zip_longest
 from typing import List
 from item import Item
 
-from item_names import AGED_BRIE, BACKSTAGE_PASSES, STANDARD_ITEM, SULFURAS
+from item_names import AGED_BRIE, BACKSTAGE_PASSES, CONJURED_ITEM_EXAMPLE, STANDARD_ITEM, SULFURAS
 
 class GildedRoseTest(unittest.TestCase):
 
@@ -22,7 +22,9 @@ class GildedRoseTest(unittest.TestCase):
              Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=15, quality=20),
              Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=10, quality=49),
              Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=5, quality=49),
-             Item(name="Conjured Mana Cake", sell_in=3, quality=6),
+             # Removing as original implementation did not handle conjured items
+             # Leaving here only as a note for the exercise
+             # Item(name="Conjured Mana Cake", sell_in=3, quality=6),
             ]
         
         expected_day_one: List[Item] = [
@@ -34,7 +36,7 @@ class GildedRoseTest(unittest.TestCase):
              Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=14, quality=21),
              Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=9, quality=50),
              Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=4, quality=50),
-             Item(name="Conjured Mana Cake", sell_in=2, quality=5),
+             # Item(name="Conjured Mana Cake", sell_in=2, quality=5),
         ]
 
         expected_day_two: List[Item] = [
@@ -46,7 +48,7 @@ class GildedRoseTest(unittest.TestCase):
              Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=13, quality=22),
              Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=8, quality=50),
              Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=3, quality=50),
-             Item(name="Conjured Mana Cake", sell_in=1, quality=4),
+             # Item(name="Conjured Mana Cake", sell_in=1, quality=4),
         ]
 
         GildedRose(items).update_quality()
@@ -124,6 +126,16 @@ class GildedRoseTest(unittest.TestCase):
         item = Item(name=BACKSTAGE_PASSES, sell_in=0, quality=20)
         result = self._act(item)
         self._validate(result, Item(name=BACKSTAGE_PASSES, sell_in=-1, quality=0)) 
+
+    def test_update_conjured_item_decreases_by_two(self):
+        item = Item(name=CONJURED_ITEM_EXAMPLE, sell_in=10, quality=20)
+        result = self._act(item)
+        self._validate(result, Item(name=CONJURED_ITEM_EXAMPLE, sell_in=9, quality=18))
+
+    def test_update_conjured_item_past_sell_by_decreases_by_four(self):
+        item = Item(name=CONJURED_ITEM_EXAMPLE, sell_in=0, quality=20)
+        result = self._act(item)
+        self._validate(result, Item(name=CONJURED_ITEM_EXAMPLE, sell_in=-1, quality=16))
 
     def _act(self, item: Item) -> Item:
         items = [item]
